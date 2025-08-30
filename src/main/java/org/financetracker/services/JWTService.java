@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -39,7 +40,12 @@ public class JWTService {
         return username.equals(userInfo.getUsername()) && !isTokenExpired(token);
     }
 
-    public String createToken(Map<String, Object> claims, String username) {
+    public String GenerateToken(String username){
+        Map<String, Object> claims = new HashMap<>();
+        return createToken(claims, username);
+    }
+
+    private String createToken(Map<String, Object> claims, String username) {
         int expiryTime = 1000 * 60 * 1;
         return Jwts
                 .builder()
